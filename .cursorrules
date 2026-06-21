@@ -1,0 +1,25 @@
+# MakeFlashcard - Trích xuất từ vựng tiếng Nhật từ ảnh
+
+## Mục đích
+Trích xuất từ vựng tiếng Nhật từ ảnh sách giáo khoa (thư mục `image/`) → tạo `content.csv`.
+
+## Khi user yêu cầu trích xuất từ vựng:
+
+1. **Phân tích**: Đọc vài ảnh đầu để hiểu cấu trúc sách (bìa, mục lục, chương, format từ vựng)
+2. **Trích xuất**: Đọc từng ảnh, trích xuất từ vựng theo chương. Mỗi từ gồm:
+   - STT (số thứ tự trong sách)
+   - Từ vựng (tiếng Nhật - kanji nếu có)
+   - Ý nghĩa (tiếng Việt CÓ DẤU)
+   - Cách đọc (hiragana/katakana)
+   - Câu ví dụ (tiếng Nhật)
+   - Dịch câu ví dụ (tiếng Việt CÓ DẤU)
+3. **Ghi file**: Tạo `content.md` dạng bảng markdown, phân theo chương và section
+4. **Chuyển CSV**: Chạy `python3 scripts/md_to_csv.py` hoặc viết script Python để chuyển md → csv
+   - Encoding: UTF-8 BOM
+   - Cột: Chương, Phần, STT, Từ vựng, Ý nghĩa, Cách đọc, Câu ví dụ, Dịch câu ví dụ
+
+## Quy tắc
+- Tiếng Việt PHẢI có dấu đầy đủ (KHÔNG viết "cong ty", phải viết "công ty")
+- Bỏ qua trang bìa, mục lục, bài tập, trang index
+- Từ không có câu ví dụ → để trống cột ví dụ
+- Nếu có thể, xử lý song song nhiều nhóm ảnh để tăng tốc
