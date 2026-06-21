@@ -39,7 +39,7 @@ def convert(md_path=None, csv_path=None):
                 if len(parts) == 6:
                     rows.append([chapter, section] + parts)
 
-    with open(csv_path, "w", encoding="utf-8", newline="") as f:
+    with open(csv_path, "w", encoding="utf-8-sig", newline="") as f:
         writer = csv.writer(f)
         writer.writerow(["Chuong", "Phan", "STT", "Tu vung", "Y nghia", "Cach doc", "Cau vi du", "Dich cau vi du"])
         writer.writerows(rows)
