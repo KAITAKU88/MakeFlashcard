@@ -1,14 +1,26 @@
 #!/usr/bin/env python3
-"""Chuyển content.md (bảng markdown từ vựng) thành content.csv"""
+"""Chuyển content.md thành content.csv rồi tạo content_N3.pdf.
+
+Pipeline hoàn chỉnh:
+  1. content.md  -> content.csv  (tạm có cột Chương/Phần)
+  2. clean_csv.py -> xóa cột Chương/Phần, chỉ giữ từ STT trở đi
+  3. md_to_pdf.py -> tạo content_N3.pdf
+"""
 
 import csv
 import sys
 import os
+import subprocess
 
-def convert(md_path="content.md", csv_path="content.csv"):
-    project_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    md_path = os.path.join(project_dir, md_path)
-    csv_path = os.path.join(project_dir, csv_path)
+SCRIPTS_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_DIR = os.path.dirname(SCRIPTS_DIR)
+
+
+def convert(md_path=None, csv_path=None):
+    if md_path is None:
+        md_path = os.path.join(PROJECT_DIR, "content.md")
+    if csv_path is None:
+        csv_path = os.path.join(PROJECT_DIR, "content.csv")
 
     rows = []
     chapter = ""
@@ -27,14 +39,29 @@ def convert(md_path="content.md", csv_path="content.csv"):
                 if len(parts) == 6:
                     rows.append([chapter, section] + parts)
 
-    with open(csv_path, "w", encoding="utf-8-sig", newline="") as f:
+    with open(csv_path, "w", encoding="utf-8", newline="") as f:
         writer = csv.writer(f)
-        writer.writerow(["Chương", "Phần", "STT", "Từ vựng", "Ý nghĩa", "Cách đọc", "Câu ví dụ", "Dịch câu ví dụ"])
+        writer.writerow(["Chuong", "Phan", "STT", "Tu vung", "Y nghia", "Cach doc", "Cau vi du", "Dich cau vi du"])
         writer.writerows(rows)
 
-    print(f"Đã tạo {csv_path} với {len(rows)} từ vựng")
+    print(f"Da tao {csv_path} voi {len(rows)} tu vung")
+    return md_path, csv_path
+
+
+def run_pipeline():
+    md_path, csv_path = convert()
+
+    # Buoc 2: Xoa cot Chuong/Phan khoi CSV
+    clean_script = os.path.join(SCRIPTS_DIR, "clean_csv.py")
+    print("Dang lam sach CSV (xoa cot Chuong/Phan)...")
+    subprocess.run([sys.executable, clean_script], check=True)
+
+    # Buoc 3: Tao PDF
+    pdf_script = os.path.join(SCRIPTS_DIR, "md_to_pdf.py")
+    pdf_path   = os.path.join(PROJECT_DIR, "content_N3.pdf")
+    print("Dang tao PDF...")
+    subprocess.run([sys.executable, pdf_script, md_path, pdf_path], check=True)
+
 
 if __name__ == "__main__":
-    md_file = sys.argv[1] if len(sys.argv) > 1 else "content.md"
-    csv_file = sys.argv[2] if len(sys.argv) > 2 else "content.csv"
-    convert(md_file, csv_file)
+    run_pipeline()

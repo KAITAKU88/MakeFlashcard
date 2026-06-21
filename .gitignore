@@ -2,3 +2,5 @@ image/
 temp_*.md
 __pycache__/
 *.pyc
+agent.sh
+
