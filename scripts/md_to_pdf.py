@@ -184,7 +184,7 @@ def parse_md(md_path):
                 parts = [p.strip() for p in line.split("|")][1:-1]
                 if len(parts) == 6:
                     stt, vocab, meaning, reading, example, translation = parts
-                    if stt and stt != "---":
+                    if stt != "---":
                         rows.append([stt, vocab, meaning, reading, example, translation])
     return rows
 

@@ -18,8 +18,8 @@ def clean_csv(path):
         if len(row) < 3:
             continue
         stt = row[2].strip()
-        # Skip rows without a valid STT number
-        if not stt or stt == '' or stt == '---':
+        # Skip rows with delimiter placeholder
+        if stt == '---':
             continue
         cleaned.append(row[2:])
     # Overwrite the original file

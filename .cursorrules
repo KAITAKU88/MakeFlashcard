@@ -23,3 +23,4 @@ Trích xuất từ vựng tiếng Nhật từ ảnh sách giáo khoa (thư mục
 - Bỏ qua trang bìa, mục lục, bài tập, trang index
 - Từ không có câu ví dụ → để trống cột ví dụ
 - Thực hiện trích xuất tuần tự và ghép nối tệp một cách hệ thống.
+- **File cuối cùng (CSV và PDF) phải có cả các từ chính (có STT số) lẫn từ phụ (không có STT, là các từ đồng nghĩa/liên quan trong bảng phụ).** Không được bỏ sót bất kỳ từ nào dù có hay không có STT.
