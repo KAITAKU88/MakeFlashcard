@@ -1,0 +1,24 @@
+{
+  "page_type": "vietnamese_letters",
+  "letters": [
+    {
+      "letter_number": 657,
+      "vietnamese_text": "Con người đều như vậy sao, khi an ủi người khác thì toàn là đạo lý, còn bản thân gặp phải chút trắc trở liền không cách nào tự mình vượt qua. Đạo lý thì hiểu rõ, chỉ là tâm tư rối bời, tình cảnh quá trêu ngươi.",
+      "chinese_text": "人是不是都这样，安慰别人的时候头头是道，自己遇到一点挫折就怎么也过不去。道理都懂，只是心绪太乱，处境太作弄人。",
+      "pinyin_text": "Rén shì bùshì dōu zhèyàng, ānwèi biérén de shíhòu tóutóu shì dào, zìjǐ yùdào yīdiǎn cuòzhé jiù zěnme yě guò bù qù. Dàolǐ dōu dǒng, zhǐshì xīnxù tài luàn, chǔjìng tài zuònòng rén."
+    },
+    {
+      "letter_number": 658,
+      "vietnamese_text": "Đời người, khi vờ hồ đồ thường sẽ rất tinh tường, sống quá tinh tường mới là sự hồ đồ lớn nhất. Con người biết đủ sẽ vui vẻ, tâm tư giản đơn mới hạnh phúc.",
+      "chinese_text": "人这一辈子，装糊涂的时候往往最清醒，活得太清醒才是最大的糊涂。知足的人常乐，心思简单才幸福。",
+      "pinyin_text": "Rén zhè yī bèizi, zhuāng hútu de shíhòu wǎngwǎng zuì qīngxǐng, huó de tài qīngxǐng cái shì zuìdà de hútu. Zhīzú de rén cháng lè, xīnsī jiǎndān cái xìngfú."
+    },
+    {
+      "letter_number": 659,
+      "vietnamese_text": "Đừng bao giờ đánh giá cao vị trí của mình trong lòng người khác, thực ra bạn chẳng là gì cả, thêm bạn cũng không thừa, bớt bạn cũng chẳng thiếu.",
+      "chinese_text": "永远别高估自己在别人心中的位置，其实你什么都不是，多你一个不多，少你一个不少。",
+      "pinyin_text": "Yǒngyuǎn bié gāogū zìjǐ zài biérén xīnzhōng de wèizhì, qíshí nǐ shénme dōu bùshì, duō nǐ yī gè bù duō, shǎo nǐ yī gè bù shǎo."
+    }
+  ],
+  "text_before_first_header": ""
+}

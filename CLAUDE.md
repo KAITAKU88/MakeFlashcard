@@ -1,97 +1,73 @@
-# MakeFlashcard - Trích xuất từ vựng tiếng Nhật từ ảnh
+# MakeFlashcard - Trích xuất từ vựng tiếng Trung từ ảnh
 
 ## Mục đích dự án
-Trích xuất từ vựng tiếng Nhật từ ảnh sách giáo khoa (trong thư mục `image/`) và tạo:
-- `content.csv` — file CSV chuẩn để làm flashcard (UTF-8, không BOM)
-- `content_N3.pdf` — file PDF khổ A4 nằm ngang, có đánh số trang và footer
+Trích xuất từ vựng tiếng Trung từ ảnh sách giáo khoa (trong thư mục `image/`) và tạo:
+- `content.csv` — file CSV chuẩn để làm flashcard (UTF-8, có BOM để hỗ trợ Excel tiếng Việt)
+- `content_chinese.pdf` — file PDF khổ A4 nằm ngang, có đánh số trang và footer, hiển thị duy nhất bảng 7 cột từ vựng không có tiêu đề chapter hay section.
 
 ---
 
 ## Quy trình thực hiện
 
-Khi user yêu cầu trích xuất từ vựng (hoặc bỏ ảnh mới vào `image/`), thực hiện **đầy đủ 6 bước** sau:
+Khi có ảnh mới trong `image/` và cần trích xuất từ vựng, thực hiện các bước sau:
 
-### Bước 1: Phân tích cấu trúc sách
-- Đọc 5 ảnh đầu tiên để xác định: bìa, mục lục, cấu trúc chương/section
-- Xác định tổng số ảnh, phạm vi ảnh của từng chương
-- Xác định format từ vựng trong sách (STT, từ, nghĩa, ví dụ...)
-- Bỏ qua: trang bìa, mục lục, trang bài tập, trang ôn tập, trang index cuối sách
+### Bước 1: Xác định phạm vi trang ảnh
+- Xác định các trang ảnh chứa từ vựng trong thư mục `image/`.
+- Bỏ qua: trang bìa, mục lục, trang bài tập, trang ôn tập, trang index cuối sách.
 
 ### Bước 2: Trích xuất từ vựng
-- Đọc các trang ảnh tương ứng với từng chương
-- Trích xuất từ vựng vào file tạm dạng Markdown (`temp_chX.md`)
-- **Định dạng bảng Markdown gồm 6 cột:**
+- Chạy kịch bản:
+  ```bash
+  python3 scripts/extract_chinese_vocab.py <start_page> <end_page> content.md
   ```
-  | STT | Từ vựng | Ý nghĩa | Cách đọc | Câu ví dụ | Dịch câu ví dụ |
-  |-----|---------|---------|----------|-----------|----------------|
-  ```
-- **Bắt buộc**: Tiếng Việt phải có dấu đầy đủ, đúng chính tả
-- Từ không có câu ví dụ: để trống cột "Câu ví dụ" và "Dịch câu ví dụ"
+- Kịch bản này sẽ tự động:
+  - OCR các trang ảnh từ `image/`.
+  - Phân tích và trích xuất từ vựng với cấu trúc 7 cột: `STT | Từ vựng gốc | Từ loại | Phiên âm | Ý nghĩa | Câu ví dụ | Dịch câu ví dụ`.
+  - **Tự động sinh/bổ sung** ý nghĩa, câu ví dụ hoặc bản dịch câu ví dụ nếu trong ảnh bị thiếu hoặc không đầy đủ, đảm bảo văn phong tự nhiên và chuẩn xác.
+  - Định dạng và ghi tiếp trực tiếp vào bảng Markdown liên tục trong `content.md`.
 
-### Bước 3: Kiểm tra & ghép
-- Kiểm tra tiếng Việt có dấu đầy đủ và đúng chính tả
-- Kiểm tra STT liên tục không bị gián đoạn
-- Ghép tất cả dữ liệu theo cấu trúc chương/phần vào `content.md`:
-  ```markdown
-  ## Chapter X Tên chương
-  ### Section Y Tên phần
-  | STT | Từ vựng | ...
-  ```
+### Bước 3: Kiểm tra
+- Kiểm tra tiếng Việt có dấu đầy đủ và đúng chính tả.
+- Kiểm tra STT liên tục không bị gián đoạn.
+- Đảm bảo trong `content.md` chỉ chứa duy nhất một bảng từ vựng Markdown, không chứa bất kỳ tiêu đề `#`, `##` hay `###` nào khác.
 
 ### Bước 4: Tạo CSV & PDF (chạy 1 lệnh duy nhất)
 ```bash
 python3 scripts/md_to_csv.py
 ```
 Lệnh này tự động:
-1. Chuyển `content.md` → `content.csv` (có cột Chương, Phần — tạm thời)
-2. Gọi `scripts/clean_csv.py` để xóa cột Chương/Phần, giữ từ STT trở đi
-3. Gọi `scripts/md_to_pdf.py` để tạo `content_N3.pdf`
+1. Chuyển `content.md` → `content.csv` (7 cột)
+2. Gọi `scripts/clean_csv.py` để định dạng lại và xác thực tính hợp lệ của CSV
+3. Gọi `scripts/md_to_pdf.py` để tạo `content_chinese.pdf`
 
 ### Bước 5: Dọn dẹp
-- Xóa tất cả file tạm: `rm temp_ch*.md`
-- Báo cáo tổng số từ vựng đã trích xuất
+- Báo cáo tổng số từ vựng đã trích xuất.
 
 ---
 
-## Thông số kỹ thuật file PDF (`content_N3.pdf`)
+## Thông số kỹ thuật file PDF (`content_chinese.pdf`)
 
 ### Trang
 - Khổ giấy: **A4 nằm ngang (Landscape)**
 - Lề trái: 42pt | Lề phải: 14pt | Lề trên: 14pt | Lề dưới: 32pt
 
-### Font chữ
-| Thành phần | Font | Cỡ |
-|------------|------|----|
-| Header bảng | DejaVu Sans Bold | 13pt |
-| STT | DejaVu Sans | 12pt |
-| Từ vựng (dòng 1) | IPAGothic (CJK) / DejaVu Sans (Latin) | 12pt |
-| Cách đọc (dòng 2) | IPAGothic (CJK) / DejaVu Sans (Latin) | 11pt, màu #444444 |
-| Ý nghĩa, Câu ví dụ, Dịch | Mixed font | 12pt |
-| Footer số trang | DejaVu Sans | 8pt |
-| Footer promo | DejaVu Sans | 8pt |
-
-### Chiến lược font (dual-font)
-- Ký tự CJK (kanji, hiragana, katakana, U+3000–U+9FFF) → **IPAGothic**
-  - Path: `/usr/share/fonts/truetype/fonts-japanese-gothic.ttf`
-- Ký tự Latin/tiếng Việt → **DejaVu Sans**
+### Font chữ (dual-font)
+- Ký tự tiếng Trung (Hán tự) -> **NotoSansSC**
+  - Path: `/home/kaitaku/projects/MakeFlashcard/fonts/NotoSansSC-Variable.ttf` (hoặc NotoSansCJKsc)
+- Ký tự Latin/tiếng Việt/Phiên âm Pinyin -> **DejaVu Sans**
   - Path: `/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf`
   - Bold: `/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf`
 
-### Cấu trúc bảng
-Cột Từ vựng hiển thị 2 dòng:
-```
-父親        ← dòng 1: từ vựng (12pt)
-ちちおや    ← dòng 2: cách đọc (11pt, xám)
-```
-
-### Chiều rộng cột (fixed pt)
-| Cột | Chiều rộng |
-|-----|-----------|
-| STT | 46pt |
-| Từ vựng + Cách đọc | 145pt |
-| Ý nghĩa | 108pt |
-| Câu ví dụ | ~248pt (50% phần còn lại) |
-| Dịch câu ví dụ | ~248pt (50% phần còn lại) |
+### Chiều rộng cột (Tổng cộng ~785pt khả dụng)
+| Cột | Chiều rộng (pt) | Mô tả |
+|-----|-----------|---|
+| STT | 30 pt | Số thứ tự |
+| Từ vựng gốc | 80 pt | Chữ Hán giản thể/phồn thể |
+| Từ loại | 60 pt | Danh từ, động từ, tính từ, v.v. |
+| Phiên âm | 90 pt | Pinyin có dấu thanh |
+| Ý nghĩa | 130 pt | Nghĩa tiếng Việt đầy đủ |
+| Câu ví dụ | 200 pt | Ví dụ bằng chữ Hán |
+| Dịch câu ví dụ | 195 pt | Dịch nghĩa ví dụ sang tiếng Việt |
 
 ### Footer (mỗi trang)
 - Góc phải: "Trang X" (xám #555555)
@@ -102,10 +78,8 @@ Cột Từ vựng hiển thị 2 dòng:
 
 ## Thông số kỹ thuật file CSV (`content.csv`)
 
-- Encoding: **UTF-8** (không BOM)
-- Cấu trúc cột: `STT, Từ vựng, Ý nghĩa, Cách đọc, Câu ví dụ, Dịch câu ví dụ`
-- Không có cột Chương/Phần (đã được `clean_csv.py` xóa)
-- Các dòng không có STT hợp lệ bị loại bỏ
+- Encoding: **UTF-8 with BOM** (hỗ trợ hiển thị đúng tiếng Việt có dấu trên Microsoft Excel)
+- Tiêu đề cột: `STT, Từ vựng gốc, Từ loại, Phiên âm, Ý nghĩa, Câu ví dụ, Dịch câu ví dụ`
 
 ---
 
@@ -114,19 +88,12 @@ Cột Từ vựng hiển thị 2 dòng:
 MakeFlashcard/
 ├── CLAUDE.md              # File quy trình này
 ├── image/                 # Thư mục chứa ảnh sách giáo khoa (001.jpg, 002.jpg, ...)
-├── content.md             # Từ vựng dạng markdown (nguồn chính)
-├── content.csv            # Output CSV (STT, Từ vựng, Ý nghĩa, Cách đọc, Câu ví dụ, Dịch)
-├── content_N3.pdf         # Output PDF A4 Landscape
+├── content.md             # Từ vựng dạng markdown (nguồn chính, 7 cột)
+├── content.csv            # Output CSV (7 cột)
+├── content_chinese.pdf    # Output PDF A4 Landscape
 └── scripts/
-    ├── md_to_csv.py       # Chuyển content.md → content.csv (gọi 2 script dưới)
-    ├── clean_csv.py       # Xóa cột Chương/Phần khỏi CSV
-    └── md_to_pdf.py       # Tạo content_N3.pdf từ content.md
+    ├── extract_chinese_vocab.py # Trích xuất và bổ sung từ vựng tiếng Trung từ ảnh
+    ├── md_to_csv.py       # Chuyển content.md → content.csv
+    ├── clean_csv.py       # Định dạng/xác thực file CSV
+    └── md_to_pdf.py       # Tạo content_chinese.pdf từ content.md
 ```
-
----
-
-## Lưu ý quan trọng
-- Tiếng Việt **PHẢI** có dấu đầy đủ (không được viết "cong ty" mà phải viết "công ty")
-- Bỏ qua trang bìa, mục lục, trang bài tập/ôn tập, trang index cuối sách
-- Ảnh được đặt tên theo thứ tự (`001.jpg`, `002.jpg`, ...) tương ứng với thứ tự trang sách
-- **Sau khi hoàn thành**, xóa file tạm: `rm temp_ch*.md`

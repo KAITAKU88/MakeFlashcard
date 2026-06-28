@@ -1,0 +1,24 @@
+{
+  "page_type": "vietnamese_letters",
+  "letters": [
+    {
+      "letter_number": 567,
+      "vietnamese_text": "Trước đây luôn cho rằng kiên trì là không bao giờ lay động, giờ mới hiểu ra, kiên trì chính là dù do dự, chùn bước, tâm tình dao động nhưng vẫn tiếp tục tiến về phía trước.",
+      "chinese_text": "以前总以为坚持就是永不动摇，后来才明白，坚持是即使犹豫、退缩、心情起伏不定，但依然继续往前走。",
+      "pinyin_text": "Yǐqián zǒng yǐwéi jiānchí jiù shì yǒng bù dòngyáo, hòulái cái míngbái, jiānchí shì jíshǐ yóuyù, tuìsuō, xīnqíng qǐfú bùdìng, dàn yīrán jìxù wǎng qián zǒu."
+    },
+    {
+      "letter_number": 568,
+      "vietnamese_text": "Thứ người khác có, chúng ta không cần ngưỡng mộ, chỉ cần nỗ lực, bản thân sẽ có ngày đạt được. Đạt được rồi cũng đừng khoe khoang, vì người khác còn đang cố gắng, sớm muộn gì họ cũng sẽ được như chúng ta hiện tại. Mỗi ngày đều cười thật vui vẻ, mệt thì ngủ, tỉnh lại cười, cuộc sống nên ung dung, thoải mái như thế.",
+      "chinese_text": "别人拥有的，我们不必羡慕，只要努力，自己终有一天也会得到。得到了也别炫耀，因为别人也在努力，迟早也会达到我们现在的水平。每天都开心地笑一笑，累了就睡，醒了就笑，生活就该这样从容自在。",
+      "pinyin_text": "Biérén yōngyǒu de, wǒmen bùbì xiànmù, zhǐyào nǔlì, zìjǐ zhōng yǒu yī tiān yě huì dédào. Dédào le yě bié xuànyào, yīnwèi biérén yě zài nǔlì, chízǎo yě huì dádào wǒmen xiànzài de shuǐpíng. Měi tiān dōu kāixīn de xiào yī xiào, lèi le jiù shuì, xǐng le jiù xiào, shēnghuó jiù gāi zhèyàng cóngróng zìzài."
+    },
+    {
+      "letter_number": 569,
+      "vietnamese_text": "Số phận là kẻ mang trong mình sự tàn ác, thỉnh thoảngnó sẽ cố tình gây ra một vài điều khó khăn, tàn nhẫn để thử thách những ngườimuốn sống yên ổn. Đứng trước những điều đó, chúng ta đương nhiên có quyền tứcgiận, đau buồn, thậm chí có thể khóc to một trận hoặc mắng chửi vài câu để giảitoả nỗi lòng, nhưng chỉ một lần này thôi. Nếu cứ để mặc cho sự bất mãn tiếp tụcdiễn ra, cuối cùng nó sẽ trở thành thù hận, như vậy thứ thay đổi không phải",
+      "chinese_text": "命运是个残忍的家伙，它偶尔会故意制造一些困难和磨难来考验那些想过安稳日子的人。面对这些，我们当然有权生气、难过，甚至可以大哭一场或者骂几句来发泄心中的郁闷，但仅此一次就好。如果任由不满继续蔓延，最终它会变成仇恨，到那时改变的不是",
+      "pinyin_text": "Mìngyùn shì gè cánrěn de jiāhuo, tā ǒuěr huì gùyì zhìzào yīxiē kùnnán hé mónàn lái kǎoyàn nàxiē xiǎng guò ānwěn rìzi de rén. Miànduì zhèxiē, wǒmen dāngrán yǒu quán shēngqì, nánguò, shènzhì kěyǐ dà kū yī chǎng huòzhě mà jǐ jù lái fāxiè xīnzhōng de yùmèn, dàn jǐn cǐ yī cì jiù hǎo. Rúguǒ rènyóu bùmǎn jìxù mànyán, zuìzhōng tā huì biàn chéng chóuhèn, dào nà shí gǎibiàn de bù shì"
+    }
+  ],
+  "text_before_first_header": ""
+}

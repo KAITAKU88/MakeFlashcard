@@ -36,15 +36,11 @@ def extract_from_image(img_path):
                         "This is a page from the Japanese vocabulary textbook 'Hajimete no Nihongo Nouryoku Shiken N2 2500'. "
                         "If this page is a vocabulary page, extract all numbered vocabulary items. "
                         "Follow these rules STRICTLY:\n"
-                        "1. Extract the 'stt' (the number preceding the word, e.g. 1, 2, 3). If there is no number preceding the word (e.g. sub-words, or affixes/words in lists like 'これも覚えよう'), set 'stt' to \"\".\n"
-                        "2. Extract 'vocab' (the main word in Japanese, e.g. 一家).\n"
-                        "3. Extract 'reading' (the reading of the word in hiragana/katakana, e.g. いっか). If there are related sub-words without a number, add them as well with \"\" stt.\n"
-                        "4. Extract 'meaning': Extract ONLY the Vietnamese meaning. Ignore English or Chinese translations. Tiếng Việt phải có dấu đầy đủ và đúng chính tả.\n"
-                        "5. Extract 'example': the Japanese example sentence.\n"
-                        "6. Extract 'translation': Extract ONLY the Vietnamese translation of the example sentence. Ignore English or Chinese translations. Tiếng Việt phải có dấu đầy đủ và đúng chính tả.\n"
-                        "7. If a word does not have an example sentence or translation, leave them as empty strings.\n"
-                        "8. If the page is not a vocabulary page (e.g. cover, TOC, review, exercises, index), set is_vocabulary_page to false.\n"
-                        "9. Extract the 'chapter' (e.g., 'Chapter 1 人と人との関係') and 'section' (e.g., 'Section 1 家族') ONLY if they are explicitly visible on the page. If the chapter name is not printed on the page, set the 'chapter' field to \"\". Do not guess the chapter number based on the section number."
+                        "1. Extract 'vocab' (the main word in Japanese, e.g. 一家).\n"
+                        "2. Extract 'reading' (the reading of the word in hiragana/katakana, e.g. いっか).\n"
+                        "3. Extract 'meaning': Extract ONLY the Vietnamese meaning. Ignore English or Chinese translations. Tiếng Việt phải có dấu đầy đủ và đúng chính tả.\n"
+                        "4. If the page is not a vocabulary page (e.g. cover, TOC, review, exercises, index), set is_vocabulary_page to false.\n"
+                        "5. Extract the 'chapter' (e.g., 'Chapter 1 人と人との関係') and 'section' (e.g., 'Section 1 家族') ONLY if they are explicitly visible on the page. If the chapter name is not printed on the page, set the 'chapter' field to \"\". Do not guess the chapter number based on the section number."
                     )
                 }
             ]
@@ -62,14 +58,11 @@ def extract_from_image(img_path):
                         "items": {
                             "type": "OBJECT",
                             "properties": {
-                                "stt": {"type": "STRING"},
                                 "vocab": {"type": "STRING"},
                                 "reading": {"type": "STRING"},
-                                "meaning": {"type": "STRING"},
-                                "example": {"type": "STRING"},
-                                "translation": {"type": "STRING"}
+                                "meaning": {"type": "STRING"}
                             },
-                            "required": ["vocab", "reading", "meaning", "example", "translation"]
+                            "required": ["vocab", "reading", "meaning"]
                         }
                     }
                 },
@@ -98,26 +91,20 @@ def extract_from_image(img_path):
     return None
 
 def process_all():
-    # We will start from Chapter 2 (032).
     images = sorted(glob.glob(os.path.join(IMAGE_DIR, "*.png")))
     
-    current_chapter = "Chapter 2 暮らし"
-    current_section = "Section 4 買い物"
+    current_chapter = ""
+    current_section = ""
     
-    with open(OUTPUT_MD, "a", encoding="utf-8") as out_f:
+    with open(OUTPUT_MD, "w", encoding="utf-8") as out_f:
         
         for img_path in images:
             basename = os.path.basename(img_path)
-            num_str = re.search(r'-(\d+)\.png$', basename)
-            if not num_str:
+            # Extract page number from filename (e.g. "page-001.png" -> 1)
+            num_match = re.search(r'(\d+)\.png$', basename)
+            if not num_match:
                 continue
             
-            num = int(num_str.group(1))
-            if num < 53:
-                continue
-            if num > 280:
-                break
-                
             print(f"Processing {basename}...")
             data = extract_from_image(img_path)
             if not data:
@@ -175,21 +162,16 @@ def process_all():
                 out_f.write(f"### {current_section}\n\n")
                 
             if need_chapter or need_section:
-                out_f.write("| STT | Từ vựng | Ý nghĩa | Cách đọc | Câu ví dụ | Dịch câu ví dụ |\n")
-                out_f.write("|---|---|---|---|---|---|\n")
+                out_f.write("| Từ vựng | Cách đọc | Ý nghĩa tiếng Việt |\n")
+                out_f.write("|---|---|---|\n")
             
             for w in words:
-                stt = w.get("stt", "")
-                if stt is None:
-                    stt = ""
                 vocab = w.get("vocab", "").replace("\n", " ").replace("|", "｜")
                 reading = w.get("reading", "").replace("\n", " ").replace("|", "｜")
                 meaning = w.get("meaning", "").replace("\n", " ").replace("|", "｜")
-                example = w.get("example", "").replace("\n", " ").replace("|", "｜")
-                translation = w.get("translation", "").replace("\n", " ").replace("|", "｜")
                 
-                # Format to Markdown table row
-                out_f.write(f"| {stt} | {vocab} | {meaning} | {reading} | {example} | {translation} |\n")
+                # Format to Markdown table row (3 columns)
+                out_f.write(f"| {vocab} | {reading} | {meaning} |\n")
                 
             out_f.flush()
             time.sleep(5) # Strict 5s delay to stay within 12 RPM (Free tier is 15 RPM)

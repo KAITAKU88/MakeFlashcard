@@ -1,0 +1,24 @@
+{
+  "page_type": "vietnamese_letters",
+  "letters": [
+    {
+      "letter_number": 600,
+      "vietnamese_text": "Nếu có một ngày em không tìm thấy tôi, dù thế nào cũng đừng buồn bã, chẳng phải tôi không còn yêu em nữa hay em đã bỏ lỡ mất tôi, mà là cuối cùng tôi cũng có đủ dũng khí để rời xa em. Nhưng xin em hãy ghi nhớ rằng, trước đây tôi thực sự từng ngốc nghếch chờ đợi em.",
+      "chinese_text": "如果有一天你找不到我了，不管怎样都别难过，不是我不再爱你了，也不是你错过了我，而是我终于有了足够的勇气离开你。但请你记住，曾经的我，真的傻傻地等过你。",
+      "pinyin_text": "Rúguǒ yǒu yītiān nǐ zhǎo bù dào wǒ le, bùguǎn zěnyàng dōu bié nánguò, bùshì wǒ bù zài ài nǐ le, yě bùshì nǐ cuòguò le wǒ, ér shì wǒ zhōngyú yǒu le zúgòu de yǒngqì líkāi nǐ. Dàn qǐng nǐ jìzhù, céngjīng de wǒ, zhēnde shǎshǎ de děng guò nǐ."
+    },
+    {
+      "letter_number": 601,
+      "vietnamese_text": "Từ bỏ sự xốc nổi, lười biếng và hứng thú nhất thời, hãy để đầu óc thoải mái, tập trung làm những việc mà bạn nên làm.",
+      "chinese_text": "戒掉浮躁、懒惰和三分钟热度，让头脑放松下来，专心去做你该做的事。",
+      "pinyin_text": "Jiè diào fúzào, lǎnduò hé sān fēnzhōng rèdù, ràng tóunǎo fàngsōng xiàlái, zhuānxīn qù zuò nǐ gāi zuò de shì."
+    },
+    {
+      "letter_number": 602,
+      "vietnamese_text": "Có thể kiểm soát được cảm xúc của bản thân thì bạn là người tao nhã, có thể khống chế được tâm tình của chính mình thì bạn là người thành công.",
+      "chinese_text": "能控制自己情绪的人，是优雅的人；能驾驭自己心情的人，才是成功的人。",
+      "pinyin_text": "Néng kòngzhì zìjǐ qíngxù de rén, shì yōuyǎ de rén; néng jiàyù zìjǐ xīnqíng de rén, cái shì chénggōng de rén."
+    }
+  ],
+  "text_before_first_header": ""
+}

@@ -1,0 +1,24 @@
+{
+  "page_type": "vietnamese_letters",
+  "letters": [
+    {
+      "letter_number": 675,
+      "vietnamese_text": "Lo nghĩ chỉ làm lãng phí thời gian, nó sẽ không thay đổi được bất cứ chuyện gì mà chỉ có thể đảo loạn suy nghĩ và lấy đi niềm vui của bạn.",
+      "chinese_text": "忧虑只会浪费时间，它改变不了任何事情，只会扰乱你的思绪，夺走你的快乐。",
+      "pinyin_text": "Yōulǜ zhǐ huì làngfèi shíjiān, tā gǎibiàn bùliǎo rènhé shìqíng, zhǐ huì rǎoluàn nǐ de sīxù, duózǒu nǐ de kuàilè."
+    },
+    {
+      "letter_number": 676,
+      "vietnamese_text": "Cách tốt nhất để không thất vọng chính là không gửi gắm hy vọng vào bất kì ai, bất cứ việc gì. Kỳ vọng là căn nguyên của tâm bệnh, tim không rung động lòng sẽ không đau.",
+      "chinese_text": "不失望的最好办法，就是不对任何人、任何事寄予希望。期望是心病的根源，心不动则不痛。",
+      "pinyin_text": "Bù shīwàng de zuìhǎo bànfǎ, jiùshì bú duì rènhé rén, rènhé shì jìyǔ xīwàng. Qīwàng shì xīnbìng de gēnyuán, xīn bú dòng zé bú tòng."
+    },
+    {
+      "letter_number": 677,
+      "vietnamese_text": "Nếu quá để tâm tới quan điểm của người khác, vậy thì cuộc sống của bạn sẽ biến thành một chiếc quần cộc, người ta làm gì bạn cũng phải tiếp nhận. Hãy học cách xem nhẹ một số chuyện, đó mới là phương thức bảo vệ bản thân tốt nhất.",
+      "chinese_text": "如果太在意别人的看法，那你的生活就会变成一条短裤，别人怎么做你都得接着。学会看淡一些事情，才是保护自己最好的方式。",
+      "pinyin_text": "Rúguǒ tài zàiyì biérén de kànfǎ, nà nǐ de shēnghuó jiù huì biànchéng yī tiáo duǎnkù, biérén zěnme zuò nǐ dōu děi jiēzhe. Xuéhuì kàndàn yīxiē shìqíng, cái shì bǎohù zìjǐ zuìhǎo de fāngshì."
+    }
+  ],
+  "text_before_first_header": ""
+}
